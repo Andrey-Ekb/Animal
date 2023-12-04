@@ -1,0 +1,57 @@
+- подготовка: 
+
+mkdir test
+cd test
+
+- создание файлов в Linux: pets.txt и pack_animals.txt
+
+cat > pets.txt
+    dog Sharik
+    cat Gaf
+    Hamsters Showtlake
+
+cat > pack_animal.txt
+    horse Julius
+    camel Vasya
+    donkeys Moses
+
+ls -l
+    -rw-rw-r-- 1 andre   39 dec 4 15:47 pack_animal.txt
+    -rw-rw-r-- 1 andre   39 dec 4 15:35 pets.txt
+
+- Объдиняем файлы и переименовываем объединенный:
+
+cat pets.txt pack_animal.txt > common.txt
+cat command.txt
+
+    dog Sharik
+    cat Gaf
+    Hamsters Showtlake
+
+    horse Julius
+    camel Vasya
+    donkeys Moses
+
+mv common.txt human_friends.txt
+
+ls -l
+    -rw-rw-r-- 1 andre   78 dec 4 16:34 human_friends.txt
+    -rw-rw-r-- 1 andre   39 dec 4 15:47 pack_animal.txt
+    -rw-rw-r-- 1 andre   39 dec 4 15:35 pets.txt
+
+- создаем новый директорий и перемещаем туда файл:
+
+mkdir animals
+
+mv human_friends.txt animals/
+
+ls -l
+    drwxrwxr-x 2 andre 4096 dec 4 16:58 animals
+    -rw-rw-r-- 1 andre   39 dec 4 15:47 pack_animal.txt
+    -rw-rw-r-- 1 andre   39 dec 4 15:35 pets.txt
+ 
+ls -l animals
+    total 4
+    -rw-rw-r-- 1 andre   78 dec 4 16:34 human_friends.txt
+
+
