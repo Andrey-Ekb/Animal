@@ -3,7 +3,7 @@
 mkdir test
 cd test
 
-- создание файлов в Linux: pets.txt и pack_animals.txt
+- 1. создание файлов в Linux: pets.txt и pack_animals.txt
 
 cat > pets.txt
     dog Sharik
@@ -39,7 +39,7 @@ ls -l
     -rw-rw-r-- 1 andre   39 dec 4 15:47 pack_animal.txt
     -rw-rw-r-- 1 andre   39 dec 4 15:35 pets.txt
 
-- создаем новый директорий и перемещаем туда файл:
+- 2. создаем новый директорий и перемещаем туда файл:
 
 mkdir animals
 
@@ -55,3 +55,21 @@ ls -l animals
     -rw-rw-r-- 1 andre   78 dec 4 16:34 human_friends.txt
 
 
+- 3. Подключить дополнительный репозиторий MySQL. Установить любой пакет
+из этого репозитория.
+
+sudo apt-get update
+sudo apt-get install MySQL-server
+sudo apt-get install MySQL-client
+
+- 4. Установить и удалить deb-пакет с помощью dpkg.
+- устанавливаем Crome. для этого нам надо скачать с Google.com установочный пакет Crome:
+  google-crome-stable_current_amd.deb
+
+- запускаем установку crome:
+
+sudo dpkg --install google-crome-stable_current_amd.deb
+
+- удалить crome:
+
+sudo dpkg --remove google-crome-stable_current_amd.deb
