@@ -1,0 +1,130 @@
+drop database Frends;
+create schema Frends;
+use Frends;
+
+-- 9. Заполнить низкоуровневые таблицы именами(животных), командами которые они выполняют и датами рождения
+
+-- создаем таблицы животных
+
+create table types(
+id int not null,
+name varchar(10)not null)
+engine=innodb;
+
+create table animal(
+id int primary key auto_increment,
+name varchar(10) not null,
+birthday date not null,
+type int not null,
+commands varchar(100) not null)
+engine=InnoDB;
+
+-- заполняем таблицыa
+
+insert into types (id, name) value(1, 'dog');
+insert into types (id, name) value(2, 'cat');
+insert into types (id, name) value(3, 'hamster');
+insert into types (id, name) value(4, 'horse');
+insert into types (id, name) value(5, 'camel');
+insert into types (id, name) value(6, 'donkey');
+
+insert into animal(name, birthday, type, commands) value('Sharik','2020-02-15',1,'jump,sleep');
+insert into animal(name, birthday, type, commands) value('Gaf','2016-08-23',2,'sleep,run,lei');
+insert into animal(name, birthday, type, commands) value('Nayda','2012-10-01',1,'sit,slep');
+insert into animal(name, birthday, type, commands) value('Showflake','2021-06-01',3,'polli,there');
+insert into animal(name, birthday, type, commands) value('Shadow','2023-06-16',2,'jamp,run');
+insert into animal(name, birthday, type, commands) value('Butch','2019-01-10',3,'polli, there');
+insert into animal(name, birthday, type, commands) value('Julius','2022-05-13',4,'ride, stand there');
+insert into animal(name, birthday, type, commands) value('Moses','2022-01-19',6,'stand, sleep');
+insert into animal(name, birthday, type, commands) value('Vasia','2020-08-10',5,'stand,sleep');
+insert into animal(name, birthday, type, commands) value('Gambit','2019-09-12',4,'sleep, ride');
+insert into animal(name, birthday, type, commands) value('Tailak','2016-03-05',5,'sleep, run');
+insert into animal(name, birthday, type, commands) value('Sekret','2021-11-29',6,'polli');
+
+select * from types;
+select * from animal;
+
+-- создаем представление домашних и вьючных хивотныхalter
+
+CREATE  OR REPLACE VIEW Pets AS
+	select types.name as type, animal.name AS name, animal.birthday, animal.commands
+    from
+        animal
+        JOIN types ON (animal.type = types.id)
+	where 
+		types.id=1 or types.id=2 or types.id=3;
+        
+CREATE  OR REPLACE VIEW Pack_animal AS
+	select types.name as type, animal.name AS name, animal.birthday, animal.commands
+    from
+        animal
+        JOIN types ON ((animal.type = types.id))
+	where 
+		types.id=4 or types.id=5 or types.id=6;
+	
+select * from Pets;
+select * from Pack_animal;  
+
+-- 10. Удалив из таблицы верблюдов, т.к. верблюдов решили перевезти в другой питомник на зимовку. Объединить таблицы лошади, и ослы в одну таблицу.
+
+delete from animal
+where animal.type=5;
+
+CREATE  OR REPLACE VIEW Pack_animal1 AS
+	select types.name as type, animal.name AS name, animal.birthday, animal.commands
+    from
+        animal
+        JOIN types ON ((animal.type = types.id))
+	where 
+		types.id=4 or types.id=6;
+        
+select * from Pack_animal; 
+
+/* 11.Создать новую таблицу “молодые животные” в которую попадут все животные старше 1 года, но младше 3 лет и в отдельном столбце с точностью
+до месяца подсчитать возраст животных в новой таблице
+*/
+
+
+CREATE  OR REPLACE VIEW age AS
+    SELECT 
+        animal.name AS name,
+        types.name AS type,
+        animal.birthday AS birthday,
+        TIMESTAMPDIFF(YEAR,
+            animal.birthday,
+            CURDATE()) AS Year,
+        (TIMESTAMPDIFF(MONTH,
+            animal.birthday,
+            CURDATE()) % 12) AS Month
+    FROM
+        (animal JOIN types ON ((animal.type = types.id)));
+
+
+CREATE  OR REPLACE VIEW young_animals AS
+    SELECT 
+        age.name AS name,
+        age.type AS type,
+        age.birthday AS birthday,
+        age.Year AS age,
+        age.MONTH AS month
+    FROM
+        age
+    WHERE
+        ((age.Year >= 1)
+            AND (age.Year <= 3));
+            
+select * from young_animals;
+
+-- 12. Объединить все таблицы в одну, при этом сохраняя поля, указывающие на прошлую принадлежность к старым таблицам.
+
+CREATE  OR REPLACE VIEW all_animal AS
+    SELECT 
+		types.name AS type,
+        animal.name AS name,
+        animal.birthday AS birthday,
+        animal.commands AS commands
+    FROM
+        (animal
+        JOIN types ON ((animal.type = types.id)));
+        
+select * from all_animal;
