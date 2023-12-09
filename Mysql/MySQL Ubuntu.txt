@@ -1,0 +1,278 @@
+andre@virt:~$ pwd
+/home/andre
+andre@virt:~$ mysql -uroot -p
+andre@virt:~$
+andre@virt:~$ system status mysql
+Command 'system' not found, did you mean:
+  command 'system3' from deb simh (3.8.1-6.1)
+  command 'systemd' from deb systemd (249.11-0ubuntu3.11)
+Try: sudo apt install <deb name>
+andre@virt:~$ systemctl status mysql
+● mysql.service - MySQL Community Server
+     Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset:>
+     Active: active (running) since Tue 2023-12-05 21:55:04 +05; 8min ago
+    Process: 712 ExecStartPre=/usr/share/mysql/mysql-systemd-start pre (code=ex>
+   Main PID: 791 (mysqld)
+     Status: "Server is operational"
+      Tasks: 38 (limit: 5440)
+     Memory: 424.3M
+        CPU: 4.265s
+     CGroup: /system.slice/mysql.service
+             └─791 /usr/sbin/mysqld
+
+дек 05 21:54:54 virt systemd[1]: Starting MySQL Community Server...
+дек 05 21:55:04 virt systemd[1]: Started MySQL Community Server.
+andre@virt:~$
+andre@virt:~$ mysql -uroot -p
+andre@virt:~$ sudo mysql_installation
+sudo: mysql_installation: command not found
+andre@virt:~$ sudo mysql
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.35-0ubuntu0.22.04.1 (Ubuntu)
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+Owners.
+mysql> show databases;
++------------------------------+
+| Database                       |
++------------------------------+
+| information_schema   |
+| mysql                              |
+| performance_schema |
+| sys                                   |
++-------------------------------+
+4 rows in set (0,01 sec)
+
+mysql> create schema frends;
+Query OK, 1 row affected (0,01 sec)
+
+mysql> use frends;
+Database changed
+mysql> create table types(
+    -> id int not null,
+    -> name varchar(10) not null)
+    -> engine = innodb;
+Query OK, 0 rows affected (0,04 sec)
+
+mysql> create table animal(
+    -> id int primary key auto_increment,
+    -> name varchar(10) not null,
+    -> birthday date not null,
+    -> type int not null,
+    -> commands varchar(100) not null)
+    -> engine = innodb;
+Query OK, 0 rows affected (0,04 sec)
+
+mysql> insert into types(id, name) value (1, 'dog');
+Query OK, 1 row affected (0,01 sec)
+
+mysql> insert into types(id, name) value (2, 'cat');
+Query OK, 1 row affected (0,01 sec)
+
+mysql> insert into types(id, name) value (3, 'hamster');
+Query OK, 1 row affected (0,01 sec)
+
+mysql> insert into types(id, name) value (4, 'horse');
+Query OK, 1 row affected (0,01 sec)
+
+mysql> insert into types(id, name) value (5, 'camel');
+Query OK, 1 row affected (0,01 sec)
+
+mysql> insert into types(id, name) value (6, 'donkey');
+Query OK, 1 row affected (0,01 sec)
+
+mysql>
+mysql> insert into animal(name, birthday, type, commands) value('Sharik', '2020-02-15', 1, 'jamp, sleep');
+Query OK, 1 row affected (0,01 sec)
+
+mysql> insert into animal(name, birthday, type, commands) value('Gaf', '2016-08-23', 2, 'sleep, run, lei');
+Query OK, 1 row affected (0,01 sec)
+
+mysql> insert into animal(name, birthday, type, commands) value('Nayda', '2012-10-01', 1, 'sit, sleep');
+Query OK, 1 row affected (0,00 sec)
+
+mysql> insert into animal(name, birthday, type, commands) value('Showflake', '2021-06-01', 3, 'poll, there');
+Query OK, 1 row affected (0,00 sec)
+
+mysql> insert into animal(name, birthday, type, commands) value('Shadow', '2023-06-16', 2, 'jamp, run');
+Query OK, 1 row affected (0,01 sec)
+
+mysql> insert into animal(name, birthday, type, commands) value('Butch', '2019-01-10', 3, 'polli, there');
+Query OK, 1 row affected (0,01 sec)
+
+mysql> insert into animal(name, birthday, type, commands) value('Jilius', '2022-05-13', 4, 'ride, stand, there');
+Query OK, 1 row affected (0,00 sec)
+
+mysql> insert into animal(name, birthday, type, commands) value('Moses', '2022-01-19', 6, 'stand, sleep');
+Query OK, 1 row affected (0,01 sec)
+
+mysql> insert into animal(name, birthday, type, commands) value('Vasia', '2020-08-10', 5, 'stand, sleep');
+Query OK, 1 row affected (0,01 sec)
+
+mysql> insert into animal(name, birthday, type, commands) value('Gambit', '2020-09-12', 4, 'sleep, ride');
+Query OK, 1 row affected (0,01 sec)
+
+mysql> insert into animal(name, birthday, type, commands) value('Tailak', '2016-03-05', 5, 'sleep, run');
+Query OK, 1 row affected (0,02 sec)
+
+mysql> insert into animal(name, birthday, type, commands) value('Sekret', '2021-11-29', 6, 'polli');
+Query OK, 1 row affected (0,00 sec)
+
+mysql> select * from types;
++----+------------+
+| id | name      |
++----+------------+
+|  1 | dog         |
+|  2 | cat          |
+|  3 | hamster |
+|  4 | horse      |
+|  5 | camel      |
+|  6 | donkey   |
++----+------------+
+6 rows in set (0,00 sec)
+
+mysql> select * from animal;
++----+-------------  +----------------+--------+-------------------------+
+| id | name         | birthday       | type | commands             |
++----+--------------+-----------------+--------+-------------------------+
+|  1 | Sharik        | 2020-02-15 |    1     | jamp, sleep            |
+|  2 | Gaf             | 2016-08-23 |    2     | sleep, run, lei         |
+|  3 | Nayda        | 2012-10-01 |    1     | sit, sleep                 |
+|  4 | Showflake | 2021-06-01 |    3     | poll, there              |
+|  5 | Shadow      | 2023-06-16 |    2    | jamp, run               |
+|  6 | Butch          | 2019-01-10 |    3    | polli, there             |
+|  7 | Jilius             | 2022-05-13 |    4   | ride, stand, there  |
+|  8 | Moses          | 2022-01-19 |    6   | stand, sleep            |
+|  9 | Vasia             | 2020-08-10 |    5   | stand, sleep           |
+| 10 | Gambit       | 2020-09-12 |    4    | sleep, ride              |
+| 11 | Tailak          | 2016-03-05  |    5    | sleep, run              |
+| 12 | Sekret          | 2021-11-29  |    6 | polli                           |
++----+-----------------+-----------------+------+--------------------------+
+12 rows in set (0,01 sec)
+
+mysql> create or replace view Pets as
+    -> select types.name as type, animal.name as name, animal.birthday, animal.commands
+    -> from
+    -> animal
+    -> join types o mysql>
+
+n (animal.type = types.id)
+    -> where
+    -> types.id=1 or types.id=2 or types.id=3;
+Query OK, 0 rows affected (0,02 sec)
+
+mysql> select * from Pets;
++------------+--------------+----------------+-------------------+
+| type        | name        | birthday      | commands     |
++------------+---------------+----------------+-------------------+
+| dog         | Sharik        | 2020-02-15 | jamp, sleep    |
+| cat          | Gaf             | 2016-08-23 | sleep, run, lei |
+| dog         | Nayda        | 2012-10-01 | sit, sleep        |
+| hamster | Showflake | 2021-06-01 | poll, there     |
+| cat          | Shadow      | 2023-06-16 | jamp, run       |
+| hamster | Butch          | 2019-01-10 | polli, there    |
++------------+----------------+-----------------+------------------+
+6 rows in set (0,00 sec)
+
+mysql> create or replace view Pack_animal as
+    -> select types.name as type, animal.name as name, animal.birthday, animal.commands
+    -> from
+    -> animal
+    -> join types on (animal.type = types.id)
+    ->  where
+    -> types.id=4 or types.id=5 or types.id=6;
+Query OK, 0 rows affected (0,01 sec)
+mysql> select * fro classes of animals m Pack_animal;
++-----------+-----------+-----------------+-----------------------+
+| type      | name    | birthday   ---| commands           |
++-----------+-----------+-----------------+------------------------+
+| horse    | Jilius      | 2022-05-13 | ride, stand, there |
+| donkey | Moses  | 2022-01-19 | stand, sleep           |
+| camel    | Vasia    | 2020-08-10 | stand, sleep           |
+| horse    | Gambit | 2020-09-12 | sleep, ride              |
+| camel    | Tailak   | 2016-03-05 | sleep, run               |
+| donkey  | Sekret | 2021-11-29 | polli                          |    
++------------+----------+-----------------+-------------------------+
+6 rows in set (0,00 sec)
+
+mysql> delete from animal
+    -> where animal.type=5;
+Query OK, 2 rows affected (0,00 sec)
+
+mysql>
+mysql> create or replace view Pack_animal as
+    -> select types.name as type, animal.name as name, animal.birthday, animal.commands
+    -> from
+    -> animal
+    -> join types on (animal.type = types.id)
+    -> where
+    -> types.id=4 or types.id=6;
+Query OK, 0 rows affected (0,01 sec)
+
+mysql> select * from Pack_animal;
++-----------+-----------+----------------+------------------------+
+| type      | name    | birthday      | commands           |
++-----------+-----------+----------------+------------------------+
+| horse    | Jilius     | 2022-05-13 | ride, stand, there |
+| donkey | Moses  | 2022-01-19 | stand, sleep          |
+| horse    | Gambit | 2020-09-12 | sleep, ride            |
+| donkey | Sekret   | 2021-11-29 | polli                       |
++-----------+------------+----------------+------------------------+
+4 rows in set (0,00 sec)
+
+mysql>
+mysql> create or replace view age as
+    -> select animal.name as name, types.name as type, animal.birthday,
+    -> TIMESTAMPDIFF(YEAR, animal.birthday, curdate()) as Year,
+    -> (TIMESTAMPDIFF(month, animal.birthday, curdate()) %12) as Month
+    -> from
+    -> (animal join types on ((animal.type = types.id)));
+Query OK, 0 rows affected (0,01 sec)
+
+mysql>
+mysql> create or replace view young_animal as
+    -> select age.name as name, age.type as type, age.birthday as birthday, age.Year as age, age.Month as month
+    -> from
+    -> age
+    -> where
+    -> ((age.Year >=1) and (age.Year <=3));
+Query OK, 0 rows affected (0,00 sec)
+
+mysql> select * from young_animal;
++--------------+-------------+---------------+------+------------+
+| name         | type        | birthday     |  age  | month |
++---------------+------------+----------------+-------+----------+
+| Sharik        | dog         | 2020-02-15 |    3   |     9       |
+| Showflake | hamster | 2021-06-01 |    2   |     6       |
+| Jilius          | horse      | 2022-05-13 |    1   |     6        |
+| Moses       | donkey  | 2022-01-19 |    1    |    10       |
+| Gambit      | horse     | 2020-09-12 |    3    |     2       |
+| Sekret        | donkey  | 2021-11-29 |    2    |     0       |
++---------------+------------+-----------------+-------+----------+
+6 rows in set (0,00 sec)
+mysql>
+mysql> create or replace view all_animal as
+    -> select
+    -> types.name as type, animal.name as name, animal.birthday as birthday,animal. commands as commands
+    -> from
+    -> (animal join types on ((animal.type = types.id)));
+Query OK, 0 rows affected (0,01 sec)
+
+mysql> select * from all_animal;
++------------+----------------+----------------+------------------------+
+| type        | name          | birthday       | commands           |
++------------+----------------+-----------------+-----------------------+
+| dog         | Sharik          | 2020-02-15 | jamp, sleep          |
+| cat          | Gaf              | 2016-08-23 | sleep, run, lei        |
+| dog         | Nayda        | 2012-10-01 | sit, sleep                 |
+| hamster | Showflake | 2021-06-01 | poll, there              |     
+| cat          | Shadow     | 2023-06-16 | jamp, run                |
+| hamster | Butch         | 2019-01-10 | polli, there             |
+| horse      | Jilius           | 2022-05-13 | ride, stand, there |
+| donkey    | Moses       | 2022-01-19 | stand, sleep          |
+| horse       | Gambit      | 2020-09-12 | sleep, ride             |
+| donkey   | Sekret         | 2021-11-29 | polli                        |
++-------------+----------------+------------+----------------------------+
+10 rows in set (0,00 sec)
