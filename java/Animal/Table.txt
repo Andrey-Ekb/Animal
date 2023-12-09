@@ -1,0 +1,10 @@
+dog; Sharik; 2020-02-15; jamp, sleep;
+cat; Gaf; 2016-08-23; sleep, run, lei;
+dog; Nayda; 2012-10-01; sit, sleep;
+hamster; Showflake; 2021-06-01; poll, there;
+cat; Shadow; 2023-06-16; jamp, run;
+hamster; Butch; 2019-01-10; polli, there;
+horse; Jilius; 2022-05-13; ride, stand, there;
+donkey; Moses; 2022-01-19; stand, sleep;
+horse; Gambit; 2020-09-12; sleep, ride;
+donkey; Sekret; 2021-11-29; polli;
