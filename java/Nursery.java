@@ -5,16 +5,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Nursery<Animal> {
+public class Nursery {
     private ArrayList<Animal> register;
 
     public Nursery() {
         register = new ArrayList<>();
     }
 
-    
+
     public void loadAnimals() throws IOException {
-        File file = new File("C:\\Users\\andre\\Desktop\\Итоговая контрольная работа по специализации\\java\\Animal\\Animal.txt");
+        File file = new File("C:\\Users\\andre\\Desktop\\Итоговая контрольная работа по специализации\\java\\Animal.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line;
             while ((line = br.readLine()) != null) {
@@ -25,7 +25,7 @@ public class Nursery<Animal> {
 
     public void saveAnimals() throws IOException {
     
-        FileWriter writer = new FileWriter("C:\\Users\\andre\\Desktop\\Итоговая контрольная работа по специализации\\java\\Animal\\Animal.txt",
+        FileWriter writer = new FileWriter("C:\\Users\\andre\\Desktop\\Итоговая контрольная работа по специализации\\java\\Animal.txt",
                     false);
             for (Animal animal : register) {
                 writer.append(animal.toString() + "\n");
@@ -39,7 +39,7 @@ public class Nursery<Animal> {
         return register;
     }
     
-    public void addAnimal(Animal animal) {
-        register.add(animal);
-    }         
+    public static void addCommand(){}
+
+    public static void addAnimal() {}        
 }

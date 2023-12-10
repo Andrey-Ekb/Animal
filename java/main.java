@@ -55,10 +55,10 @@ public class Main {
                     printRegister();
                     break;
                 case 4:
-                    addAnimal();
+                    Nursery.addAnimal();
                     break;
                 case 5:
-                    addCommand();
+                    Nursery.addCommand();
                     break;
                 case 6:
                     findAnimal();
@@ -79,6 +79,7 @@ public class Main {
         }
     }
     
+
     protected static Integer getInt() {
         while (true) {
             try {
