@@ -5,12 +5,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Nursery {
+public class Nursery<Animal> {
     private ArrayList<Animal> register;
 
     public Nursery() {
         register = new ArrayList<>();
     }
+
     public void loadAnimals() throws IOException {
         File file = new File("C:\\Users\\andre\\Desktop\\Итоговая контрольная работа по специализации\\java\\Animal\\Animal.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
