@@ -1,4 +1,3 @@
-package java.Animal;
 
 import java.time.LocalDate;
 import java.util.Set;

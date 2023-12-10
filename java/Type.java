@@ -1,4 +1,4 @@
-package java.Animal;
+
 
 public enum Type {
     Dog,

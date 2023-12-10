@@ -1,7 +1,3 @@
-package java;
-
-import java.*;
-import java.Animal.Nursery;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -11,19 +7,20 @@ public class Main {
     private static Nursery Nu;
     private static Scanner in;
 
-    private static void main(String[] args){
+    public static void main(String[] args){
         Nu = new Nursery();
         in = new Scanner(System.in);
-        while (true){
-        Menu();
-        execOperation(getInt("Ваш выбор: "));
-        getText("Нажмите Enter для продолжения...");       
-        }  
+        while (true) {
+            menu();
+            execOperation(getInt("ваш выбор: "));
+            getText("Нажмите Enter для продолжения ...");
+        }
     }
-    private static void Menu() {
+    private static void menu() {
+    
         clearConsole();
         
-        System.out.println("Menu:");
+        System.out.println("           Menu:");
         System.out.println("1. загрузите список животных");
         System.out.println("2. сохраните список животных");
         System.out.println("3. вывести список животных");
@@ -32,7 +29,9 @@ public class Main {
         System.out.println("6. вывести животных по дате рождения");
         System.out.println("7. счетчик животных");
         System.out.println("0. выход из программы");
+        System.out.println();
     }
+    
     private static void clearConsole() {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -129,7 +128,7 @@ public class Main {
     protected static Animal getAnimalIndex() {
         while (true) {
             try {
-                return aManager.getRegister().get(getInt("Введите индекс животного: ") - 1);
+                return Nu.getRegister().get(getInt("Введите индекс животного: ") - 1);
             } catch (Exception e) {
                 System.out.println("Животного не существует");
             }
@@ -140,7 +139,7 @@ public class Main {
         Integer index = 0;
 
         System.out.println();
-        for (Animal animal : aManager.getRegister()) {
+        for (Animal animal : Nu.getRegister()) {
             index += 1;
             String line = animal.toString().replace(";", " ");
             System.out.println(index + ". " + line);
@@ -149,18 +148,18 @@ public class Main {
     }
 
     public static void loadAnimals() throws IOException {
-        aManager.loadAnimals();
+        Nu.loadAnimals();
         System.out.println("Список животных загружен");
     }
 
     public static void saveAnimals() throws IOException {
-        aManager.saveAnimals();
+        Nu.saveAnimals();
         System.out.println("Список животных сохранен");
     }   
 
     public static void findAnimal() {
         LocalDate date = getDate();
-        for (Animal animal : aManager.getRegister()) {
+        for (Animal animal : Nu.getRegister()) {
             if (animal.getBirthday().compareTo(date) != 0)
                 continue;
             String line = animal.toString().replace(";", " ");
@@ -170,7 +169,7 @@ public class Main {
 
     public static void countAnimals() {
         Integer all = 0, pet = 0, pack = 0;
-        for (Animal animal : aManager.getRegister()) {
+        for (Animal animal : Nu.getRegister()) {
             all += 1;
             if (animal instanceof Pet)
                 pet += 1;
