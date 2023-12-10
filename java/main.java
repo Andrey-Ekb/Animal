@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     private static Nursery Nu;
     private static Scanner in;
-
+    
     public static void main(String[] args){
         Nu = new Nursery();
         in = new Scanner(System.in);

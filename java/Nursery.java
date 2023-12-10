@@ -12,6 +12,7 @@ public class Nursery<Animal> {
         register = new ArrayList<>();
     }
 
+    
     public void loadAnimals() throws IOException {
         File file = new File("C:\\Users\\andre\\Desktop\\Итоговая контрольная работа по специализации\\java\\Animal\\Animal.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
